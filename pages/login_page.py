@@ -12,7 +12,6 @@ class LoginPage:
         self.page = page
 
     def navigate(self):
-        # Use the base URL from Config in utils/config.py
         self.page.goto(Config.BASE_URL)
         self.page.wait_for_load_state('networkidle', timeout=Config.TIMEOUT * 1000)
 
@@ -22,5 +21,4 @@ class LoginPage:
         self.page.click(self.LOGIN_BUTTON_SELECTOR)
 
     def get_error_message(self):
-        # Select the div with the class alert and return its text
         return self.page.locator('div.alert.alert-danger.mt-3').text_content().strip()
