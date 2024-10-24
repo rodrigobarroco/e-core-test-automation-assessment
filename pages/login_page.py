@@ -1,21 +1,20 @@
 import re
 from playwright.sync_api import Page, expect
 from dto.user_credentials_dto import UserCredentialsDTO
-from dto.config_dto import ConfigDTO
+from utils.config import Config
 
 class LoginPage:
     USERNAME_SELECTOR = 'input[name="username"]'
     PASSWORD_SELECTOR = 'input[name="password"]'
     LOGIN_BUTTON_SELECTOR = '#btnLogin'
 
-    def __init__(self, page: Page, config: ConfigDTO):  # Add config parameter
+    def __init__(self, page: Page):
         self.page = page
-        self.config = config
 
     def navigate(self):
-        # Use the base_url from the config DTO
-        self.page.goto(self.config.base_url)
-        self.page.wait_for_load_state('networkidle')  # Ensure the page is fully loaded
+        # Use the base URL from Config in utils/config.py
+        self.page.goto(Config.BASE_URL)
+        self.page.wait_for_load_state('networkidle', timeout=Config.TIMEOUT * 1000)
 
     def login(self, credentials: UserCredentialsDTO):
         self.page.fill(self.USERNAME_SELECTOR, credentials.username)
@@ -23,4 +22,5 @@ class LoginPage:
         self.page.click(self.LOGIN_BUTTON_SELECTOR)
 
     def get_error_message(self):
-        return self.page.locator("div.error").text_content()
+        # Select the div with the class alert and return its text
+        return self.page.locator('div.alert.alert-danger.mt-3').text_content().strip()
