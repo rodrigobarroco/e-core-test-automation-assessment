@@ -1,8 +1,7 @@
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))  # Add parent directory to the system path for module imports
-import re
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 from pages.login_page import LoginPage  # Import the LoginPage class
 from pages.invoice_page import InvoicePage  # Import the InvoicePage class
 from pages.account_page import AccountPage  # Import the AccountPage class
