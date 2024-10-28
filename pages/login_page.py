@@ -1,4 +1,3 @@
-import re
 from playwright.sync_api import Page, expect
 from dto.user_credentials_dto import UserCredentialsDTO
 from utils.config import Config

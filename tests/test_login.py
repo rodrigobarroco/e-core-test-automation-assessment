@@ -1,7 +1,6 @@
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-import re
 from playwright.sync_api import Page, expect
 from pages.login_page import LoginPage
 from dto.user_credentials_dto import UserCredentialsDTO
